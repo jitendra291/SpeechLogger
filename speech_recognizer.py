@@ -25,5 +25,7 @@ class SpeechRecognizer:
             try:
                 audio_string = self.recognize()
                 print("You Spoke: {0}".format(audio_string))
+                if audio_string == "goodbye":
+                    break
             except Exception:
                 print("Sorry, Could not understand audio!!")
