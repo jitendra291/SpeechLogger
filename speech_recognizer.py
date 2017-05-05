@@ -6,6 +6,7 @@ pip install SpeechRecognition
 """
 
 import speech_recognition as sr
+from .writer import WorksheetWriter
 
 
 class SpeechRecognizer:
@@ -13,6 +14,7 @@ class SpeechRecognizer:
     def __init__(self):
         super().__init__()
         self.recognizer = sr.Recognizer()
+        self.writer = WorksheetWriter()
 
     def recognize(self):
         with sr.Microphone() as source:                # using the default microphone as the audio source
@@ -27,5 +29,8 @@ class SpeechRecognizer:
                 print("You Spoke: {0}".format(audio_string))
                 if audio_string == "goodbye":
                     break
+                # TODO: Can do Some NLP processing on audio_string to do some smart processing
+                # writing in the worksheet
+                self.writer.write(audio_string)
             except Exception:
                 print("Sorry, Could not understand audio!!")
